@@ -1,20 +1,24 @@
-### OpenCV: Open Source Computer Vision Library
+###toolchain.cmake
+# this one is important
+set( CMAKE_SYSTEM_NAME Linux )
 
-#### Resources
+#this one not so much
+set( CMAKE_SYSTEM_PROCESSOR arm )
 
-* Homepage: <http://opencv.org>
-* Docs: <http://docs.opencv.org/master/>
-* Q&A forum: <http://answers.opencv.org>
-* Issue tracking: <https://github.com/opencv/opencv/issues>
+# specify the cross compiler
+set( CMAKE_C_COMPILER /opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/bin/arm-none-linux-gnueabi-gcc )
+set( CMAKE_CXX_COMPILER /opt/freescale/usr/local/gcc-4.6.2-glibc-2.13-linaro-multilib-2011.12/fsl-linaro-toolchain/bin/arm-none-linux-gnueabi-g++ )
 
-#### Contributing
+# where is the target environment - point to your rootfs here
+set( CMAKE_FIND_ROOT_PATH  /home/xopenlee/proj/ltib/rootfs )
 
-Please read before starting work on a pull request: <https://github.com/opencv/opencv/wiki/How_to_contribute>
+# search for programs in the build host directories
+set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER )
 
-Summary of guidelines:
+# for libraries and headers in the target directories
+set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )
+set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )
 
-* One pull request per issue;
-* Choose the right base branch;
-* Include tests and documentation;
-* Clean up "oops" commits before submitting;
-* Follow the coding style guide.
+# point to your rootfs path here 
+set( CMAKE_CXX_FLAGS "-L/home/xopenlee/proj/ltib/rootfs/usr/lib" )
+
